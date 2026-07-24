@@ -1,0 +1,851 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Marmitas Lucrativas — Transforme sua cozinha em renda extra</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=Work+Sans:wght@400;500;600;700;800&display=swap');
+
+:root{
+  --charcoal: #2A2016;
+  --charcoal-2: #352A1D;
+  --cream: #FAF5EA;
+  --cream-2: #F1E9D8;
+  --paprika: #C1440E;
+  --paprika-dark: #9C350A;
+  --turmeric: #E3A02F;
+  --sage: #6B7A5E;
+  --ink: #241B12;
+}
+
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  font-family:'Work Sans', sans-serif;
+  background:var(--cream);
+  color:var(--ink);
+  line-height:1.5;
+  -webkit-font-smoothing:antialiased;
+}
+h1,h2,h3{font-family:'Sora', sans-serif;}
+img{max-width:100%;display:block;}
+.wrap{max-width:960px;margin:0 auto;padding:0 24px;}
+a{color:inherit;}
+
+@media (prefers-reduced-motion: reduce){
+  *{animation:none !important; transition:none !important;}
+}
+
+/* ---------- Top ribbon ---------- */
+.ribbon{
+  background:var(--paprika);
+  color:var(--cream);
+  text-align:center;
+  font-size:14px;
+  font-weight:700;
+  letter-spacing:.03em;
+  padding:10px 16px;
+}
+.ribbon span{opacity:.85;font-weight:500;}
+
+/* ---------- Hero ---------- */
+.hero{
+  background:radial-gradient(120% 100% at 50% 0%, var(--charcoal-2) 0%, var(--charcoal) 60%);
+  color:var(--cream);
+  padding:56px 0 64px;
+  position:relative;
+  overflow:hidden;
+}
+.hero::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background-image:
+    radial-gradient(circle at 15% 20%, rgba(227,160,47,.10), transparent 40%),
+    radial-gradient(circle at 85% 75%, rgba(193,68,14,.12), transparent 45%);
+  pointer-events:none;
+}
+.eyebrow{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  font-size:13px;
+  font-weight:700;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  color:var(--turmeric);
+  margin-bottom:18px;
+}
+.eyebrow::before{content:"●";font-size:8px;}
+.hero h1{
+  font-size:clamp(32px, 5vw, 52px);
+  font-weight:800;
+  line-height:1.08;
+  letter-spacing:-.01em;
+  max-width:820px;
+}
+.hero h1 em{
+  font-style:italic;
+  color:var(--turmeric);
+  font-weight:600;
+}
+.hero p.sub{
+  margin-top:20px;
+  font-size:clamp(16px,2vw,19px);
+  color:#E7DFCF;
+  max-width:620px;
+  font-weight:400;
+}
+.hero p.sub strong{color:var(--cream);}
+
+/* ---------- Video / dial ---------- */
+.video-block{
+  margin-top:40px;
+  position:relative;
+  max-width:720px;
+}
+.video-frame{
+  position:relative;
+  border-radius:14px;
+  overflow:hidden;
+  border:1px solid rgba(250,245,234,.14);
+  background:#000;
+  box-shadow:0 30px 60px -20px rgba(0,0,0,.6);
+}
+.video-frame video{
+  width:100%;
+  display:block;
+  aspect-ratio:16/9;
+  background:#000;
+}
+.video-overlay-hint{
+  position:absolute;
+  top:16px;
+  left:16px;
+  background:rgba(0,0,0,.55);
+  backdrop-filter:blur(4px);
+  color:var(--cream);
+  font-size:12px;
+  font-weight:600;
+  padding:6px 12px;
+  border-radius:100px;
+  display:flex;
+  align-items:center;
+  gap:6px;
+}
+.video-overlay-hint svg{width:12px;height:12px;}
+
+.gauge-row{
+  margin-top:14px;
+  display:flex;
+  align-items:center;
+  gap:14px;
+}
+.gauge{
+  position:relative;
+  width:52px;
+  height:52px;
+  flex-shrink:0;
+}
+.gauge svg{transform:rotate(-90deg);}
+.gauge-track{stroke:rgba(250,245,234,.14);}
+.gauge-fill{
+  stroke:var(--turmeric);
+  stroke-linecap:round;
+  transition:stroke-dashoffset .3s linear, stroke .3s;
+}
+.gauge-fill.done{stroke:var(--sage);}
+.gauge-pct{
+  position:absolute;
+  inset:0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:12px;
+  font-weight:700;
+  color:var(--cream);
+}
+.gauge-label{
+  font-size:13.5px;
+  color:#CBBFA3;
+  line-height:1.4;
+}
+.gauge-label strong{color:var(--turmeric);font-weight:700;}
+.gauge-label strong.ready{color:var(--sage);}
+
+/* ---------- CTA button ---------- */
+.cta{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:10px;
+  width:100%;
+  max-width:720px;
+  margin-top:22px;
+  padding:19px 28px;
+  font-family:'Work Sans',sans-serif;
+  font-size:17px;
+  font-weight:700;
+  border-radius:10px;
+  border:none;
+  cursor:pointer;
+  transition:transform .15s ease, box-shadow .15s ease, background .25s ease, color .25s ease;
+  text-decoration:none;
+}
+.cta.locked{
+  background:rgba(250,245,234,.08);
+  color:#8B8171;
+  cursor:not-allowed;
+  border:1px solid rgba(250,245,234,.14);
+}
+.cta.unlocked{
+  background:var(--paprika);
+  color:var(--cream);
+  box-shadow:0 14px 30px -10px rgba(193,68,14,.55);
+  animation:pop .5s ease;
+}
+.cta.unlocked:hover{transform:translateY(-2px);box-shadow:0 18px 34px -8px rgba(193,68,14,.65);}
+@keyframes pop{
+  0%{transform:scale(.97);}
+  60%{transform:scale(1.015);}
+  100%{transform:scale(1);}
+}
+.cta-note{
+  margin-top:10px;
+  font-size:12.5px;
+  color:#9C8F76;
+  text-align:center;
+  max-width:720px;
+}
+
+/* ---------- Section shared ---------- */
+section{padding:72px 0;}
+.section-title{
+  font-size:clamp(26px,3.4vw,36px);
+  font-weight:700;
+  color:var(--ink);
+  max-width:640px;
+  line-height:1.15;
+}
+.section-kicker{
+  font-size:12.5px;
+  font-weight:700;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  color:var(--paprika);
+  margin-bottom:12px;
+}
+.section-sub{
+  margin-top:14px;
+  font-size:16px;
+  color:#5B5142;
+  max-width:600px;
+}
+
+/* ---------- checklist ---------- */
+.check-grid{
+  margin-top:40px;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:14px 32px;
+}
+.check-item{
+  display:flex;
+  gap:12px;
+  align-items:flex-start;
+  font-size:15.5px;
+  color:var(--ink);
+  padding:16px 0;
+  border-bottom:1px solid var(--cream-2);
+}
+.check-item svg{flex-shrink:0;margin-top:2px;color:var(--sage);}
+
+/* ---------- feature cards ---------- */
+.features{
+  background:var(--charcoal);
+  color:var(--cream);
+}
+.features .section-title{color:var(--cream);}
+.features .section-sub{color:#C9BEA6;}
+.feat-grid{
+  margin-top:44px;
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:20px;
+}
+.feat-card{
+  background:var(--charcoal-2);
+  border:1px solid rgba(250,245,234,.08);
+  border-radius:14px;
+  padding:28px 24px;
+}
+.feat-card .num{
+  font-family:'Fraunces',serif;
+  font-size:13px;
+  font-weight:600;
+  color:var(--turmeric);
+  margin-bottom:14px;
+}
+.feat-card h3{font-size:19px;font-weight:700;margin-bottom:8px;}
+.feat-card p{font-size:14.5px;color:#B9AF98;}
+
+/* ---------- modules ---------- */
+.modules-list{margin-top:44px;}
+.module{
+  display:grid;
+  grid-template-columns:64px 1fr;
+  gap:20px;
+  padding:26px 0;
+  border-top:1px solid var(--cream-2);
+}
+.module:last-child{border-bottom:1px solid var(--cream-2);}
+.module .idx{
+  font-family:'Sora',sans-serif;
+  font-size:28px;
+  font-weight:600;
+  color:var(--paprika);
+  opacity:.55;
+}
+.module h3{font-size:19px;font-weight:700;margin-bottom:6px;}
+.module p{font-size:14.5px;color:#5B5142;max-width:520px;}
+
+/* ---------- testimonials carousel ---------- */
+.testi-section{background:var(--cream-2);}
+.testi-viewport{
+  margin-top:40px;
+  overflow:hidden;
+  position:relative;
+}
+.testi-track{
+  display:flex;
+  gap:20px;
+  transition:transform .4s ease;
+}
+.testi-card{
+  flex:0 0 100%;
+  background:var(--cream);
+  border:1px solid #E4D9BF;
+  border-radius:16px;
+  padding:28px 26px;
+  box-sizing:border-box;
+}
+.testi-stars{color:var(--turmeric);font-size:15px;letter-spacing:2px;margin-bottom:14px;}
+.testi-quote{font-size:16px;color:var(--ink);line-height:1.5;}
+.testi-author{margin-top:16px;font-size:13.5px;font-weight:700;color:var(--paprika-dark);}
+.testi-controls{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:18px;
+  margin-top:22px;
+}
+.testi-arrow{
+  width:38px;height:38px;
+  border-radius:50%;
+  border:1px solid #D9CCAA;
+  background:var(--cream);
+  display:flex;align-items:center;justify-content:center;
+  cursor:pointer;
+  color:var(--ink);
+  transition:background .2s;
+}
+.testi-arrow:hover{background:var(--cream-2);}
+.testi-dots{display:flex;gap:8px;}
+.testi-dot{
+  width:8px;height:8px;border-radius:50%;
+  background:#D9CCAA;
+  cursor:pointer;
+  transition:background .2s, transform .2s;
+}
+.testi-dot.active{background:var(--paprika);transform:scale(1.2);}
+@media (min-width:680px){
+  .testi-card{flex:0 0 calc(50% - 10px);}
+}
+
+/* ---------- pricing ---------- */
+.pricing{
+  background:var(--cream-2);
+}
+.price-card{
+  margin:44px auto 0;
+  max-width:520px;
+  background:var(--cream);
+  border:1px solid #E4D9BF;
+  border-radius:18px;
+  padding:38px 34px;
+  text-align:center;
+  box-shadow:0 24px 50px -30px rgba(42,32,22,.3);
+}
+.price-tag-old{
+  font-size:15px;
+  color:#9C8F76;
+  text-decoration:line-through;
+}
+.price-tag-new{
+  font-family:'Sora',sans-serif;
+  font-size:52px;
+  font-weight:800;
+  color:var(--paprika-dark);
+  margin:4px 0 2px;
+}
+.price-tag-new sup{font-size:22px;top:-1.2em;}
+.price-sub{font-size:13.5px;color:#7A6F58;margin-bottom:24px;}
+.price-list{
+  text-align:left;
+  list-style:none;
+  margin-bottom:28px;
+}
+.price-list li{
+  display:flex;
+  gap:10px;
+  font-size:14.5px;
+  padding:9px 0;
+  border-bottom:1px dashed #E4D9BF;
+  color:var(--ink);
+}
+.price-list li svg{flex-shrink:0;color:var(--sage);margin-top:2px;}
+.secure-note{
+  margin-top:16px;
+  font-size:12.5px;
+  color:#9C8F76;
+}
+
+/* ---------- guarantee ---------- */
+.guarantee{
+  display:flex;
+  align-items:center;
+  gap:28px;
+  background:var(--charcoal);
+  color:var(--cream);
+  border-radius:18px;
+  padding:38px;
+  margin-top:0;
+}
+.guarantee .seal{
+  flex-shrink:0;
+  width:112px;height:112px;
+  border-radius:50%;
+  border:2px solid var(--turmeric);
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Sora',sans-serif;
+  font-weight:700;
+  font-size:17px;
+  color:var(--turmeric);
+  text-align:center;
+  line-height:1.3;
+  padding:8px;
+  box-sizing:border-box;
+}
+.guarantee h3{font-size:20px;margin-bottom:8px;}
+.guarantee p{font-size:14.5px;color:#C9BEA6;}
+
+/* ---------- FAQ ---------- */
+.faq-item{
+  border-top:1px solid var(--cream-2);
+  padding:22px 0;
+}
+.faq-item:last-child{border-bottom:1px solid var(--cream-2);}
+.faq-item summary{
+  cursor:pointer;
+  font-weight:700;
+  font-size:16px;
+  list-style:none;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:16px;
+}
+.faq-item summary::-webkit-details-marker{display:none;}
+.faq-item summary .plus{
+  font-size:20px;
+  color:var(--paprika);
+  transition:transform .2s ease;
+  flex-shrink:0;
+}
+.faq-item[open] summary .plus{transform:rotate(45deg);}
+.faq-item p{margin-top:12px;font-size:14.5px;color:#5B5142;max-width:640px;}
+
+/* ---------- closing ---------- */
+.closing{
+  background:radial-gradient(120% 100% at 50% 100%, var(--charcoal-2) 0%, var(--charcoal) 60%);
+  color:var(--cream);
+  text-align:center;
+}
+.closing h2{font-size:clamp(26px,3.6vw,38px);max-width:640px;margin:0 auto;}
+.closing p{margin-top:16px;color:#C9BEA6;max-width:520px;margin-left:auto;margin-right:auto;}
+.closing a.back{
+  display:inline-block;
+  margin-top:30px;
+  font-weight:700;
+  font-size:14.5px;
+  color:var(--turmeric);
+  text-decoration:none;
+  border-bottom:1px solid var(--turmeric);
+  padding-bottom:2px;
+}
+
+footer{
+  padding:28px 0;
+  text-align:center;
+  font-size:12.5px;
+  color:#9C8F76;
+  background:var(--charcoal);
+}
+
+/* ---------- editor note ---------- */
+.edit-note{
+  background:#FFF4E0;
+  border:1px dashed var(--turmeric);
+  color:#6B4E12;
+  font-size:12.5px;
+  padding:10px 14px;
+  border-radius:8px;
+  margin-top:14px;
+  max-width:720px;
+}
+
+@media (max-width:720px){
+  .check-grid{grid-template-columns:1fr;}
+  .feat-grid{grid-template-columns:1fr;}
+  .module{grid-template-columns:44px 1fr;}
+  .module .idx{font-size:22px;}
+  .guarantee{flex-direction:column;text-align:center;}
+  section{padding:52px 0;}
+}
+</style>
+</head>
+<body>
+
+<div class="ribbon">🔥 Oferta de lançamento — de <s>R$147,00</s> por <strong>R$37,50</strong> <span>· vagas limitadas</span></div>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="eyebrow">Método Marmitas Lucrativas</div>
+    <h1>O passo a passo pra vender marmitas de casa e faturar até <em>R$3.000 por mês</em></h1>
+    <p class="sub">Assista ao vídeo abaixo até <strong>75%</strong> e veja como sair do zero, sem loja, sem funcionário e sem precisar investir alto pra começar.</p>
+
+    <div class="video-block">
+      <div class="video-frame">
+        <!-- 
+          COLOQUE AQUI O LINK DO SEU VÍDEO HOSPEDADO (ex: Cloudinary, YouTube não-listado convertido, Vimeo, etc.)
+          O arquivo enviado por você tem ~42MB — hospede-o em um serviço de vídeo antes de publicar a página.
+        -->
+        <video id="salesVideo" controls playsinline preload="metadata" poster="">
+          <source src="COLOQUE_AQUI_O_LINK_DO_VIDEO.mp4" type="video/mp4">
+          Seu navegador não suporta vídeo em HTML5.
+        </video>
+        <div class="video-overlay-hint">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 5L6 9H2v6h4l5 4V5z"/><path d="M19.07 4.93a10 10 0 010 14.14M15.54 8.46a5 5 0 010 7.07"/></svg>
+          Aumente o volume
+        </div>
+      </div>
+
+      <div class="gauge-row">
+        <div class="gauge">
+          <svg width="52" height="52" viewBox="0 0 52 52">
+            <circle class="gauge-track" cx="26" cy="26" r="22" fill="none" stroke-width="5"/>
+            <circle id="gaugeFill" class="gauge-fill" cx="26" cy="26" r="22" fill="none" stroke-width="5"
+              stroke-dasharray="138.2" stroke-dashoffset="138.2"/>
+          </svg>
+          <div class="gauge-pct" id="gaugePct">0%</div>
+        </div>
+        <div class="gauge-label" id="gaugeLabel">
+          Assista <strong>75%</strong> do vídeo para liberar a compra
+        </div>
+      </div>
+
+      <button class="cta locked" id="ctaButton" disabled>
+        🔒 O botão libera aos 75% do vídeo
+      </button>
+      <p class="cta-note">Pagamento processado com segurança · Acesso imediato após a confirmação</p>
+      <!-- lembrete interno: troque o link do vídeo e o link de checkout da Cactos pelos reais antes de publicar -->
+    </div>
+  </div>
+</header>
+
+<section>
+  <div class="wrap">
+    <div class="section-kicker">Esse método é pra você</div>
+    <h2 class="section-title">Isso aqui faz sentido pra você se…</h2>
+    <div class="check-grid">
+      <div class="check-item"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>Você já cozinha bem e quer transformar isso em renda de verdade</div>
+      <div class="check-item"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>Precisa de um dinheiro extra entrando ainda este mês</div>
+      <div class="check-item"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>Quer trabalhar em casa, no seu tempo, perto da família</div>
+      <div class="check-item"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>Sonha em ter um negócio próprio sem depender de patrão</div>
+      <div class="check-item"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>Já vende marmita, mas trabalha muito e sobra pouco no fim do mês</div>
+      <div class="check-item"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>Quer começar com pouco dinheiro, usando o que já tem em casa</div>
+    </div>
+  </div>
+</section>
+
+<section class="features">
+  <div class="wrap">
+    <div class="section-kicker">Chega desse ciclo</div>
+    <h2 class="section-title">Pare de cozinhar o dia inteiro pra fechar o mês sem sobrar nada</h2>
+    <p class="section-sub">Quem vende marmita sem método geralmente erra em três pontos: preço mal calculado, cardápio que não rende e falta de organização — o resultado é trabalhar demais e lucrar de menos. O Marmitas Lucrativas te dá o caminho certo desde o primeiro dia, mesmo que você nunca tenha vendido nada.</p>
+    <div class="feat-grid">
+      <div class="feat-card">
+        <div class="num">Baixo investimento</div>
+        <h3>Comece com o que você já tem</h3>
+        <p>Sem precisar alugar espaço nem comprar equipamento caro pra dar o primeiro passo.</p>
+      </div>
+      <div class="feat-card">
+        <div class="num">No seu tempo</div>
+        <h3>Cabe na sua rotina</h3>
+        <p>Poucas horas por dia, organizadas do jeito certo, já são suficientes pra começar a faturar.</p>
+      </div>
+      <div class="feat-card">
+        <div class="num">Alta demanda</div>
+        <h3>Todo mundo precisa comer</h3>
+        <p>Diferente de modismos, comida é necessidade diária — é dinheiro entrando todo mês.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="section-kicker">O que você vai aprender</div>
+    <h2 class="section-title">Um passo a passo direto ao ponto, sem enrolação</h2>
+    <div class="modules-list">
+      <div class="module">
+        <div class="idx">01</div>
+        <div><h3>Escolha do nicho certo</h3><p>Como descobrir qual tipo de marmita tem mais procura e mais margem no seu bairro.</p></div>
+      </div>
+      <div class="module">
+        <div class="idx">02</div>
+        <div><h3>Estrutura básica em casa</h3><p>O que é realmente necessário em utensílios, embalagens e organização para começar com segurança.</p></div>
+      </div>
+      <div class="module">
+        <div class="idx">03</div>
+        <div><h3>Cardápio que não repete</h3><p>Como montar um cardápio rotativo que rende mais usando poucos ingredientes.</p></div>
+      </div>
+      <div class="module">
+        <div class="idx">04</div>
+        <div><h3>Preço que dá lucro</h3><p>Uma forma simples de calcular o preço de cada marmita sem trabalhar no prejuízo.</p></div>
+      </div>
+      <div class="module">
+        <div class="idx">05</div>
+        <div><h3>Como conseguir clientes</h3><p>Formas de divulgar e conquistar clientes fixos sem precisar gastar com anúncio.</p></div>
+      </div>
+      <div class="module">
+        <div class="idx">06</div>
+        <div><h3>Fidelização e crescimento</h3><p>Como manter os clientes voltando toda semana e, aos poucos, aumentar sua produção.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="testi-section">
+  <div class="wrap">
+    <div class="section-kicker">Depoimentos</div>
+    <h2 class="section-title">Histórias de quem já aplicou</h2>
+    <!-- lembrete interno: depoimentos abaixo são exemplos ilustrativos — troque pelos relatos reais das alunas antes de publicar -->
+    <div class="testi-viewport">
+      <div class="testi-track" id="testiTrack">
+        <div class="testi-card">
+          <div class="testi-stars">★★★★★</div>
+          <p class="testi-quote">Comecei vendendo 6 marmitas por dia pra vizinhança. Em dois meses já tinha uma lista de espera e precisei organizar tudo direito — o método me poupou meses de tentativa e erro.</p>
+          <div class="testi-author">— Camila Rodrigues, Porto Alegre</div>
+        </div>
+        <div class="testi-card">
+          <div class="testi-stars">★★★★★</div>
+          <p class="testi-quote">A parte de precificação foi a que mais mudou meu negócio. Eu não sabia que estava quase empatando com o custo — hoje calculo tudo certinho e sobra de verdade no fim do mês.</p>
+          <div class="testi-author">— Fernanda Alves, Curitiba</div>
+        </div>
+        <div class="testi-card">
+          <div class="testi-stars">★★★★★</div>
+          <p class="testi-quote">Larguei um trabalho que não me fazia bem pra cozinhar em casa. Hoje tenho minha própria renda, no meu horário, e ainda sobra tempo pra família.</p>
+          <div class="testi-author">— Juliana Martins, Novo Hamburgo</div>
+        </div>
+      </div>
+    </div>
+    <div class="testi-controls">
+      <div class="testi-arrow" id="testiPrev">‹</div>
+      <div class="testi-dots" id="testiDots"></div>
+      <div class="testi-arrow" id="testiNext">›</div>
+    </div>
+  </div>
+</section>
+
+<section class="pricing">
+  <div class="wrap" style="text-align:center;">
+    <div class="section-kicker">Oferta de lançamento</div>
+    <h2 class="section-title" style="margin:0 auto;">Garanta o seu acesso agora</h2>
+    <div class="price-card">
+      <div class="price-tag-old">De R$147,00</div>
+      <div class="price-tag-new"><sup>R$</sup>37,50</div>
+      <div class="price-sub">à vista ou parcelado no cartão</div>
+      <ul class="price-list">
+        <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>Curso completo Marmitas Lucrativas</li>
+        <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>Acesso imediato após a confirmação do pagamento</li>
+        <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>Suporte para dúvidas sobre o conteúdo</li>
+      </ul>
+      <!-- lembrete interno: troque pelo link real de checkout da Cactos -->
+      <button class="cta locked" id="ctaButtonBottom" disabled onclick="window.open('COLOQUE_AQUI_O_LINK_DA_CACTOS', '_blank')">
+        🔒 Assista o vídeo até o final para liberar
+      </button>
+      <div class="secure-note">Pagamento 100% seguro · Acesso imediato</div>
+    </div>
+    <a class="closing-back" href="#salesVideo" style="display:inline-block;margin-top:24px;font-size:13.5px;font-weight:700;color:var(--paprika-dark);text-decoration:none;border-bottom:1px solid var(--paprika-dark);padding-bottom:2px;">↑ Voltar ao vídeo</a>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="guarantee">
+      <div class="seal">7 dias<br>garantia</div>
+      <div>
+        <h3>Garantia incondicional de 7 dias</h3>
+        <p>Teste o método sem risco. Se em 7 dias você achar que não é pra você, é só pedir reembolso — sem burocracia e sem perguntas.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="section-kicker">Dúvidas frequentes</div>
+    <h2 class="section-title" style="margin-bottom:20px;">Perguntas frequentes</h2>
+    <details class="faq-item">
+      <summary>Preciso ter experiência em cozinha profissional? <span class="plus">+</span></summary>
+      <p>Não. O método foi feito para quem cozinha em casa e quer transformar isso em renda, mesmo sem experiência de restaurante.</p>
+    </details>
+    <details class="faq-item">
+      <summary>Em quanto tempo recebo o material? <span class="plus">+</span></summary>
+      <p>O acesso é liberado imediatamente após a confirmação do pagamento.</p>
+    </details>
+    <details class="faq-item">
+      <summary>Funciona na minha cidade? <span class="plus">+</span></summary>
+      <p>Sim. As estratégias funcionam em qualquer região, do interior à capital.</p>
+    </details>
+    <details class="faq-item">
+      <summary>Preciso ser MEI para começar? <span class="plus">+</span></summary>
+      <p>Não. Você pode começar informalmente e formalizar quando o negócio crescer.</p>
+    </details>
+    <details class="faq-item">
+      <summary>E se eu não gostar? <span class="plus">+</span></summary>
+      <p>Você tem 7 dias para pedir reembolso, sem precisar justificar.</p>
+    </details>
+  </div>
+</section>
+
+<section class="closing">
+  <div class="wrap">
+    <h2>Sua cozinha pode ser o começo de uma nova fase</h2>
+    <p>A decisão de hoje é entre continuar do jeito que está — ou dar o primeiro passo para uma renda de verdade.</p>
+    <a class="back" href="#salesVideo">Assistir o vídeo para liberar</a>
+  </div>
+</section>
+
+<footer>© 2026 Marmitas Lucrativas. Todos os direitos reservados.</footer>
+
+<script>
+(function(){
+  const video = document.getElementById('salesVideo');
+  const gaugeFill = document.getElementById('gaugeFill');
+  const gaugePct = document.getElementById('gaugePct');
+  const gaugeLabel = document.getElementById('gaugeLabel');
+  const ctaTop = document.getElementById('ctaButton');
+  const ctaBottom = document.getElementById('ctaButtonBottom');
+  const CIRC = 138.2; // 2 * PI * 22
+  const THRESHOLD = 0.75;
+  let unlocked = false;
+  let maxWatched = 0;
+
+  function unlock(){
+    if(unlocked) return;
+    unlocked = true;
+    [ctaTop, ctaBottom].forEach(btn=>{
+      btn.classList.remove('locked');
+      btn.classList.add('unlocked');
+      btn.disabled = false;
+      btn.innerHTML = '🔓 Quero garantir por R$37,50';
+    });
+    gaugeLabel.innerHTML = '<strong class="ready">Compra liberada!</strong> Role a página e finalize seu pedido.';
+    gaugeFill.classList.add('done');
+  }
+
+  function updateProgress(){
+    if(!video.duration) return;
+    // consider max watched position to avoid users skipping via seek bar to fake progress
+    maxWatched = Math.max(maxWatched, video.currentTime);
+    const pct = Math.min(maxWatched / video.duration, 1);
+    const offset = CIRC - (CIRC * pct);
+    gaugeFill.setAttribute('stroke-dashoffset', offset);
+    gaugePct.textContent = Math.round(pct*100) + '%';
+    if(pct >= THRESHOLD){
+      unlock();
+    }
+  }
+
+  video.addEventListener('timeupdate', updateProgress);
+  video.addEventListener('loadedmetadata', updateProgress);
+
+  ctaTop.addEventListener('click', function(){
+    if(!unlocked) return;
+    document.querySelector('.price-card').scrollIntoView({behavior:'smooth', block:'center'});
+  });
+})();
+
+(function(){
+  const track = document.getElementById('testiTrack');
+  const cards = Array.from(track.children);
+  const dotsWrap = document.getElementById('testiDots');
+  const prevBtn = document.getElementById('testiPrev');
+  const nextBtn = document.getElementById('testiNext');
+  let index = 0;
+  let perView = 1;
+  let autoTimer;
+
+  function calcPerView(){
+    perView = window.innerWidth >= 680 ? 2 : 1;
+  }
+
+  function maxIndex(){
+    return Math.max(0, cards.length - perView);
+  }
+
+  function buildDots(){
+    dotsWrap.innerHTML = '';
+    for(let i=0;i<=maxIndex();i++){
+      const d = document.createElement('div');
+      d.className = 'testi-dot' + (i===index ? ' active':'');
+      d.addEventListener('click', ()=>{ goTo(i); resetAuto(); });
+      dotsWrap.appendChild(d);
+    }
+  }
+
+  function update(){
+    const cardWidth = cards[0].getBoundingClientRect().width + 20; // gap
+    track.style.transform = `translateX(-${index * cardWidth}px)`;
+    Array.from(dotsWrap.children).forEach((d,i)=> d.classList.toggle('active', i===index));
+  }
+
+  function goTo(i){
+    index = Math.min(Math.max(i,0), maxIndex());
+    update();
+  }
+
+  function next(){ goTo(index+1 > maxIndex() ? 0 : index+1); }
+  function prev(){ goTo(index-1 < 0 ? maxIndex() : index-1); }
+
+  function resetAuto(){
+    clearInterval(autoTimer);
+    autoTimer = setInterval(next, 5000);
+  }
+
+  nextBtn.addEventListener('click', ()=>{ next(); resetAuto(); });
+  prevBtn.addEventListener('click', ()=>{ prev(); resetAuto(); });
+  window.addEventListener('resize', ()=>{ calcPerView(); index=0; buildDots(); update(); });
+
+  calcPerView();
+  buildDots();
+  update();
+  resetAuto();
+})();
+</script>
+
+</body>
+</html>
